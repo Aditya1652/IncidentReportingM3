@@ -1,0 +1,46 @@
+<div class="card mt-4">
+  <div class="card-header">
+    <h3>Incidents</h3>
+    <div class="form-group">
+      <label for="filterBy">Filter by:</label>
+      <select id="filterBy" [(ngModel)]="filterBy" class="form-control">
+        <option value="">All</option>
+        <option value="Open">Open</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Resolved">Resolved</option>
+        <option value="Low">Low Priority</option>
+        <option value="Medium">Medium Priority</option>
+        <option value="High">High Priority</option>
+      </select>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="list-group">
+      <li
+        *ngFor="let incident of incidents | incidentFilter : filterBy"
+        class="list-group-item"
+      >
+        <h5>
+          {{ incident.title }}
+          <span
+            [ngClass]="{
+              'container text-success': incident.priority === 'Low',
+              'container text-warning': incident.priority === 'Medium',
+              'container text-danger': incident.priority === 'High'
+            }"
+            >{{ incident.priority }}</span
+          >
+        </h5>
+        <p>{{ incident.description }}</p>
+        <p>Status: {{ incident.status }}</p>
+        <p *ngFor="let comment of incident.comments">{{ incident.comment }}</p>
+        <p *ngIf="isAdmin">Assigned to: {{ incident.assignedTo }}</p>
+        <app-incident-update
+          *ngIf="!isAdmin"
+          [incident]="incident"
+          (incidentUpdated)="onIncidentUpdated($event)"
+        ></app-incident-update>
+      </li>
+    </ul>
+  </div>
+</div>

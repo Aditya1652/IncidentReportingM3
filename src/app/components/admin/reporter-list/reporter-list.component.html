@@ -1,0 +1,12 @@
+<div class="card mt-4">
+  <div class="card-header">
+    <h3>Reporters</h3>
+  </div>
+  <div class="card-body">
+    <ul class="list-group">
+      <li *ngFor="let reporter of reporters" class="list-group-item">
+        {{ reporter.name || reporter.email }}
+      </li>
+    </ul>
+  </div>
+</div>

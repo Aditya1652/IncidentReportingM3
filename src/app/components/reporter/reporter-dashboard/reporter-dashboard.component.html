@@ -1,0 +1,8 @@
+<div class="container">
+  <h2>Reporter Dashboard</h2>
+  <button class="btn btn-danger mb-3" (click)="logout()">Logout</button>
+  <app-incident-list
+    [incidents]="incidents"
+    [isAdmin]="false"
+  ></app-incident-list>
+</div>

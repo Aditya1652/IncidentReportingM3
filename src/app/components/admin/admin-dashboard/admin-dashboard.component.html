@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>Admin Dashboard</h2>
+  <button class="btn btn-danger mb-3" (click)="logout()">Logout</button>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <div class="row">
+    <div class="col-md-6">
+      <app-incident-list
+        [incidents]="incidents"
+        [isAdmin]="true"
+      ></app-incident-list>
+    </div>
+    <div class="col-md-6">
+      <app-reporter-list [reporters]="reporters"></app-reporter-list>
+      <app-incident-assignment
+        [reporters]="reporters"
+        (incidentCreated)="loadIncidents()"
+      ></app-incident-assignment>
+    </div>
+  </div>
+</div>
